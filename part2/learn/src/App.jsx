@@ -26,7 +26,6 @@ const App = () => {
 
 
   const hook = () => {
-    console.log('effect')
     noteService
       .getAll()
       .then(data => {
@@ -69,6 +68,11 @@ const App = () => {
       .then(data => {
         setNotes(notes.concat(data))
         setNewNote('')
+      }).catch(error => {
+        setErrorMessage(error.response.data.error)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000) 
       })
   }
 
